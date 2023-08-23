@@ -1,0 +1,170 @@
+2. Faça um algoritmo que soma apenas os números múltiplos de 3 contidos nointervalo 2 até 42.
+
+#include <stdio.h>
+int main(){
+int soma = 0;
+
+for (int i = 2; i <= 42; i++)
+{
+if (i % 3 == 0)
+{
+soma += i;
+}
+}
+printf("Resultado da soma dos numeros multiplos de 3 no intervalo: %d\n", soma);
+return 0;
+}
+
+verificar se um número é primo:
+#include <stdio.h>
+
+int isPrime(int num) {
+    if (num <= 1) {
+        return 0; // Números menores ou iguais a 1 não são primos
+    }
+    
+    if (num <= 3) {
+        return 1; // 2 e 3 são primos
+    }
+    
+    if (num % 2 == 0 || num % 3 == 0) {
+        return 0; // Números divisíveis por 2 ou 3 não são primos
+    }
+    
+    // Verifica divisibilidade por números maiores que 3
+    for (int i = 5; i * i <= num; i += 6) {
+        if (num % i == 0 || num % (i + 2) == 0) {
+            return 0; // Se divisível, não é primo
+        }
+    }
+    
+    return 1; // Se não for divisível por nenhum dos casos acima, é primo
+}
+
+int main() {
+    int num;
+
+    printf("Digite um número: ");
+    scanf("%d", &num);
+
+    if (isPrime(num)) {
+        printf("%d é um número primo.\n", num);
+    } else {
+        printf("%d não é um número primo.\n", num);
+    }
+
+    return 0;
+}
+
+Faça um algoritmo que leia 10 valores e retorne:
+a) Quantos valores estão no intervalo [5,15]
+b) Quantos valores estão no intervalo [32, 45]
+c) Quantos valores estão fora dos intervalos 
+
+#include <stdio.h>
+int main() {
+int valor, contint = 0, contint2 = 0, contforaint = 0;
+
+for (int i = 0; i < 10; i++)
+{
+printf("Digite o valor %d: ", i + 1);
+scanf("%d", &valor);
+
+if (valor >= 5 && valor <= 15)
+{
+contint++;
+}
+else if (valor >= 32 && valor <= 45)
+{
+contint2++;
+}
+else
+{
+contforaint++;
+}
+}
+printf("Quantidade de valores no intervalo [5, 15]: %d\n", contint);
+printf("Quantidade de valores no intervalo [32, 45]: %d\n", contint2);
+printf("Quantidade de valores fora dos intervalos: %d\n", contforaint);
+
+    return 0;
+}
+Escreva um algoritmo que simule o funcionamento de um caixa eletrônico. O usuário poderá fazer N ações até que ele digite -1
+para finalizar a execução. Considere as seguintes ações e códigos inteiros:
+a) 1 para DEPOSITAR
+b) 2 para CONSULTAR O EXTRATO DA CONTA
+c) 3 para SACAR DINHEIRO
+Para a opção 3, é necessário verificar se o valor a ser sacado existe na conta. 
+Considere ainda, fora do laço de repetição, a definição (pelo usuário) de uma senha de4 números inteiros.
+Essa senha deve ser solicitada sempre que o usuário escolher aopção 2 ou 3, para depósitos não deve ser solicitada.
+Se o usuário errar a senha3vezes, a conta deve ser bloqueada (por meio de uma mensagem na tela) e o programadeve ser finalizado.
+#include <stdio.h>
+int main() {
+int saldo = 0;
+int senha = 1234;
+int senhatentativa = 0;
+int acao, valor;
+
+printf("Bem-vindo ao caixa eletronico!\n");
+while (1)
+{
+printf("Digite a acao desejada:\n");
+printf("1 - DEPOSITAR\n");
+printf("2 - CONSULTAR EXTRATO\n");
+printf("3 - SACAR DINHEIRO\n");
+printf("-1 - SAIR\n");
+scanf("%d", &acao);
+
+if (acao == -1) {
+printf("Encerrando o caixa eletronico...\n");
+break;
+}
+int senhaDigitada;
+printf("Digite a senha: ");
+scanf("%d", &senhaDigitada);
+
+if (senhaDigitada != senha)
+{
+senhatentativa++;
+if (senhatentativa >= 3)
+{
+printf("Senha incorreta 3 vezes. Conta bloqueada.\n");
+break;
+} else
+{
+printf("Senha incorreta. Tente novamente.\n");
+continue;
+}
+}
+switch (acao)
+{
+case 1: // deposito
+printf("Digite o valor a ser depositado: ");
+scanf("%d", &valor);
+saldo += valor;
+printf("Deposito realizado. Novo saldo: %d\n", saldo);
+break;
+case 2: // consultar
+printf("Saldo atual: %d\n", saldo);
+break;
+case 3: // saque
+printf("Digite o valor a ser sacado: ");
+scanf("%d", &valor);
+if (valor <= saldo)
+{
+saldo -= valor;
+printf("Saque realizado. Novo saldo: %d\n", saldo);
+}
+else
+{
+printf("Saldo insuficiente.\n");
+}
+break;
+default:
+printf("Opcao invalida. Tente novamente.\n");
+}
+}
+return 0;
+}
+
+
